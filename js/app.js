@@ -34,7 +34,9 @@ var myComparisonObject =
     }
 };
 
+//Initializing test vars and object
 var a = 'term/course';
 var b = 'term/course';
 
 console.log(myComparisonObject.compare(a,b));
+console.log(myComparisonObject.equals(a,b));
