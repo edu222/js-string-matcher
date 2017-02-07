@@ -1,27 +1,40 @@
-function getStringMatches (firstString, secondString){
-    this.searchParams = parseSearchParams(firstString);
-    this.matches = 0;
-
-    var currentParam = '';
-    for (var index in searchParams){
-        currentParam = searchParams[index];
-        if ( secondString.search(currentParam) != -1 ){
-            this.matches ++;
+var myComparisonObject = 
+{
+    getStringMatches: function(searchString, resultsString)
+    {
+        this.searchParams = this.parseSearchParams(searchString);
+        this.results = this.parseSearchParams(resultsString);
+        this.matches = 0;
+      
+        for (var searchParam in this.searchParams)
+        {
+            for (result in this.results) {
+                if (  this.searchParams[searchParam] === this.results[result])
+                {
+                    this.matches++;
+                }
+            }
         }
+        return this.matches;
+    },
+    parseSearchParams: function(queryString)
+    {
+        return queryString.split('/');
+    },
+    compare: function(a, b)
+    {
+        this.count = this.getStringMatches(a, b)
+        this.a = this.parseSearchParams(a);
+        this.b = this.parseSearchParams(b);
+        return 2 * ( this.count/(this.b.length + this.a.length) );
+    },
+    equals: function (a, b)
+    {
+         return (this.compare(a,b) === 1);
     }
-    return this.matches;
-}
-
-function parseSearchParams(queryString){
-     return queryString.split('/');
-}
-
-function compare(a , b) {
-    this.count = getStringMatches (a, b)
-    return this.count/(b.length + a.length);
-}
+};
 
 var a = 'term/course';
-var b = 'term/course/';
+var b = 'term/course';
 
-console.log(compare(a,b));
+console.log(myComparisonObject.compare(a,b));
