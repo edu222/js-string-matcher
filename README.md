@@ -1,2 +1,2 @@
 # js-string-matcher
-Javascript App to determine how similar 2 given strings are
+Javascript App to search matches of a given string A on a String B
